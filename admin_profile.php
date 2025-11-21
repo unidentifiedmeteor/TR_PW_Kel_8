@@ -15,6 +15,7 @@ $username = $_SESSION["username"];
     <title>Document</title>
 </head>
 <body>
+    <button onclick="history.back()">Back</button>
     <h2><?php echo $username?></h2>
     <a href="logout.php">Logout</a>
 </body>
