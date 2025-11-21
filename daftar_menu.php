@@ -11,15 +11,15 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Home</title>
+    <title>Daftar Menu</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="body-admin">
+<body class="menu-body">
     <div class="navbar-admin">
         <a href="admin_home.php">Home</a>
         <a href="daftar_menu.php">Menu</a>
-        <a href="admin_profile.php">Profile</a>
+        <a href="">Profile</a>
     </div>
-    <h2>Ini halaman admin</h2>
+    <h1>Daftar menu</h1>    
 </body>
 </html>

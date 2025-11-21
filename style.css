@@ -9,3 +9,17 @@
 .login {
     background-color: yellow;
 }
+
+.body-admin{
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.navbar-admin{
+    background-color: yellow;
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}

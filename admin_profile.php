@@ -4,22 +4,18 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     echo "WEH bukan admin kok mau masuk?!";
     exit;
 }
-?>
 
+$username = $_SESSION["username"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Home</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
-<body class="body-admin">
-    <div class="navbar-admin">
-        <a href="admin_home.php">Home</a>
-        <a href="daftar_menu.php">Menu</a>
-        <a href="admin_profile.php">Profile</a>
-    </div>
-    <h2>Ini halaman admin</h2>
+<body>
+    <h2><?php echo $username?></h2>
+    <a href="logout.php">Logout</a>
 </body>
 </html>
