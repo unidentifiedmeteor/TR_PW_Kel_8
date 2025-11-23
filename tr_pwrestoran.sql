@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2025 at 04:17 AM
+-- Generation Time: Nov 23, 2025 at 05:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,7 +59,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `username`, `password`, `role`) VALUES
-(2, 'admin', '123', 'admin');
+(2, 'admin', '123', 'admin'),
+(3, 'user satu', 'user1', 'user'),
+(4, 'user dua', 'user2', 'user');
 
 --
 -- Indexes for dumped tables
@@ -85,13 +87,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
