@@ -64,17 +64,68 @@ if (isset($_POST['tambah'])) {
             if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
         }
     }
-    $stmt = $conn->prepare("INSERT INTO menu (nama, harga, image_path) VALUES (?, ?, ?)"); 
-    $stmt->bind_param("sss", $nama, $harga, $gambar); 
-    if ($stmt->execute()) {
-        echo "✅ Data berhasil ditambahkan<br>";
-    } else {
-        echo "❌ Gagal menambah data<br>";
+}
+
+// --- UPDATE DATA ---
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $nama = $_POST['nama'];
+    $harga = $_POST['harga'];
+    $err = null;
+    $gambarPath = handleUpload('gambar', $err);
+    if ($gambarPath === false) {
+        $errMsg = $err;
+    } 
+    elseif (!$nama || $harga == '') {
+        $errMsg = "Nama & harga harus diisi dengan benar.";
+        if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
+    } 
+
+ else {
+
+        //ambil gambar lama
+        $stmt = $conn->prepare("SELECT image_path FROM menu WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();                                                    
+        $res = $stmt->get_result()->fetch_assoc();                           
+        $stmt->close();                                                      
+
+        $oldImage = $res['image_path'] ?? null;  
+
+        $imagePath = ($gambarPath === null) ? $oldImage : $gambarPath; 
+
+        $stmt = $conn->prepare("UPDATE menu SET nama=?, harga=?, image_path=? WHERE id=?"); 
+        $stmt->bind_param("sssi", $nama, $harga, $imagePath, $id);                           
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            header("Location: " . $_SERVER['PHP_SELF']); 
+            exit;
+        } 
+        else {
+            $errMsg = "❌ Gagal update data: " . $stmt->error;
+            $stmt->close();
+
+            if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
+        }
     }
+}
+
+// --- MODE EDIT ---
+$editData = null;
+if (isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    
+    $stmt = $conn->prepare("SELECT * FROM menu WHERE id = ?"); 
+    $stmt->bind_param("i", $id); 
+    $stmt->execute();
+    $result = $stmt->get_result(); 
+    $editData = $result->fetch_assoc(); 
     $stmt->close();
 }
-$result = $conn->query("SELECT * FROM menu ORDER BY id DESC")
 
+// Buat READ
+$result = $conn->query("SELECT * FROM menu ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
