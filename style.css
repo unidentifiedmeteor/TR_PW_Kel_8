@@ -23,3 +23,8 @@
     top: 0;
     width: 100%;
 }
+
+.menu-semuanya{
+    display: flex;
+    background-color: green;
+}
