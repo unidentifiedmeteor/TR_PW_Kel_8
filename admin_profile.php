@@ -14,9 +14,9 @@ $username = $_SESSION["username"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body class="body admin profile">
     <button onclick="history.back()">Back</button>
-    <h2><?php echo $username?></h2>
+    <h2>Username: <?php echo $username?></h2>
     <a href="logout.php">Logout</a>
 </body>
 </html>

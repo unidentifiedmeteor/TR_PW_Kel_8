@@ -1,4 +1,8 @@
-.body-login{
+.body {
+    padding-top: 30px;
+}
+
+.body.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,14 +12,10 @@
 
 .login {
     background-color: yellow;
+    width: fit-content;
 }
 
-.body-admin{
-    height: 100vh;
-    box-sizing: border-box;
-}
-
-.navbar-admin{
+.navbar-admin {
     background-color: yellow;
     display: flex;
     justify-content: space-evenly;
@@ -24,7 +24,12 @@
     width: 100%;
 }
 
-.menu-semuanya{
+.menu-semuanya {
     display: flex;
-    background-color: green;
+    justify-content: space-evenly;
+}
+
+.body.admin {
+    height: 100vh;
+    box-sizing: border-box;
 }

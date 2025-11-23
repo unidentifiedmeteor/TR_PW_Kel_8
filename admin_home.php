@@ -14,7 +14,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
     <title>Admin Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="body-admin">
+<body class="body admin">
     <div class="navbar-admin">
         <a href="admin_home.php">Home</a>
         <a href="admin_daftar_menu.php">Menu</a>

@@ -147,7 +147,7 @@ $result = $conn->query("SELECT * FROM menu ORDER BY id DESC");
     <title>Daftar Menu</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="body-menu">
+<body class="body menu">
     <div class="navbar-admin">
         <a href="admin_home.php">Home</a>
         <a href="admin_daftar_menu.php">Menu</a>
