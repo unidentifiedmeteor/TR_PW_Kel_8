@@ -124,6 +124,17 @@ if (isset($_GET['edit'])) {
     $stmt->close();
 }
 
+// --- DELETE DATA ---
+if (isset($_GET['hapus'])) {
+    $id = $_GET['hapus'];
+    $stmt = $conn->prepare("DELETE FROM menu WHERE id = ?"); 
+    $stmt->bind_param("i", $id); 
+    $stmt->execute();
+    $stmt->close();
+    header("Location: admin_daftar_menu.php");
+    exit;
+}
+
 // Buat READ
 $result = $conn->query("SELECT * FROM menu ORDER BY id DESC");
 ?>
