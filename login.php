@@ -6,59 +6,78 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT*FROM roles
-    WHERE username = ? AND password = ?");
+    $stmt = $conn->prepare("SELECT * FROM roles WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
 
     $result = $stmt->get_result();
 
-    if($result->num_rows>0){
+    if($result->num_rows > 0){
         $user = $result->fetch_assoc();
 
         $_SESSION["id"] = $user["id"];
         $_SESSION["username"] = $user["username"];
         $_SESSION["role"] = $user["role"];
 
-        if($user["role"]=="admin"){
+        if($user["role"] == "admin"){
             header("Location: admin_home.php");
-        } else if($user["role"]=="kasir"){
+        } else if($user["role"] == "kasir"){
             header("Location: kasir_home.php");
-        }
-        else {
+        } else {
             header("Location: user_home.php");
         }
-
+        exit;
     } else {
-        echo "Username atau password salah";
+        $error = "Username atau password salah";
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Westo - Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<body>
+<div class="container">
+    <div class="main-box">
 
-<body class="body-login">
-    <div class="login">
-        <h2>Login</h2>
-        <form method="post">
-            <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" required><br><br>
-            <button type="submit">Login</button>
-            <a href="signup.php">Sign Up (for users)</a>
-            <p>Nanti admin sama kasir bisa ditambah dari admin. Jadi sign up rolenya auto jadi user.</p>
-        </form>
+        <div class="left">
+            <h1 class="logo">Westo</h1>
+            <img src="gambar_makanan/img1.png" class="food-img">
+        </div>
+
+        <div class="right">
+            <div class="login-card">
+
+                <h2 class="title">Sign In</h2>
+
+                <form method="post">
+                    <label>Email</label>
+                    <input type="text" name="username" placeholder="Email" required>
+
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password" required>
+
+                    <button type="submit" class="btn-login">Sign In</button>
+
+                    <div class="divider">or sign in with</div>
+
+                    <div class="icons">
+                        <img src="gambar_makanan/fb.png">
+                        <img src="gambar_makanan/gugel.png">
+                    </div>
+                </form>
+
+            </div>
+        </div>
 
     </div>
-</body>
+</div>
 
+
+</body>
 </html>
