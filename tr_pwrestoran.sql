@@ -99,3 +99,38 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- tabel tr_orders
+-- Query SQL untuk membuat tabel tr_orders
+CCREATE TABLE tr_orders (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    
+    -- Kolom Foreign Key ke Menu
+    menu_id INT(11) NOT NULL,
+    
+    -- Detail Item Pesanan
+    quantity INT(11) NOT NULL,
+    
+    -- Kolom Foreign Key ke User/Staff
+    order_by_user_id INT(11) NOT NULL,
+    
+    -- Informasi Transaksi
+    order_date DATETIME NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL, 
+    status VARCHAR(50) NOT NULL,
+    
+    PRIMARY KEY (id),
+    
+    -- 1. Relasi ke Tabel MENU (DULU: tr_pwirestoran)
+    FOREIGN KEY (menu_id) 
+        REFERENCES menu(id) -- DIKOREKSI: Menggunakan 'menu'
+        ON UPDATE CASCADE 
+        ON DELETE RESTRICT, 
+        
+    -- 2. Relasi ke Tabel ROLES (DULU: tr_roles)
+    FOREIGN KEY (order_by_user_id) 
+        REFERENCES roles(id) -- DIKOREKSI: Menggunakan 'roles'
+        ON UPDATE CASCADE 
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;

@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('gambar_makanan/bg.png') no-repeat center center;
+}
+
+/* CONTAINER UTAMA */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD BESAR (KIRI + KANAN) */
+.main-box {
+    width: 90%;
+    max-width: 1350px;
+    height: 85vh;
+    display: flex;
+    background-color: rgba(20, 20, 20, 0.877);
+    border-radius: 35px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+/* BAGIAN KIRI */
+.left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;                 /* atas ke bawah */
+    justify-content: center;                /* vertical center */
+    align-items: center;                    /* horizontal center */
+    gap: 10px;                              /* jarak antar elemen */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Tulisan WESTO */
+.left .logo {
+    font-size: 80px;
+    font-weight: 700;
+    color: white;
+    margin: 0;                               /* hapus jarak bawaan */
+}
+
+/* Gambar makanan */
+.food-img {
+    width: 100%;
+    max-width: 500px;                       /* batas maksimal */
+    height: auto;                            /* gambar tetap proporsional */
+    object-fit: contain;                     /* gambar tidak terpotong */
+}
+
+
+/* BAGIAN KANAN */
+.right {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+/* CARD LOGIN */
+.login-card {
+    width: 85%;
+    background: #1d1d1d;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+/* INPUT */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+/* BUTTON LOGIN */
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    background: #f5bb4b;
+    color: #a83a2e;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* PEMBATAS */
+.divider {
+    text-align: center;
+    color: #ccc;
+    margin-top: 12px;
+    margin-bottom: 15px;
+}
+
+/* IKON SOSMED */
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.icons img {
+    width: 35px;
+    cursor: pointer;
+}
+
+.error {
+    background: #ff5252;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+}
