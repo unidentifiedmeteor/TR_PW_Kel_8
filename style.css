@@ -39,7 +39,10 @@
     justify-content: space-evenly;
 }
 
-/* SIGN IN */
+
+
+
+/* SIGN IN & SIGN */
 * {
     margin: 0;
     padding: 0;
@@ -185,4 +188,46 @@ input {
     border-radius: 8px;
     text-align: center;
     margin-bottom: 15px;
+}
+
+/* --- TATA LETAK SIGN UP --- */
+
+/* Atur posisi teks "Belum punya akun? Sign Up" agar berada di tengah */
+.signup-prompt {
+    text-align: center;
+    margin-top: 20px; /* Jarak dari tombol Sign In */
+    font-size: 0.95em;
+    color: #ccc; /* Warna teks prompt */
+}
+
+/* Style untuk tautan 'Sign Up' */
+.signup-link {
+    color: #FFC069; /* Warna oranye/emas sebagai highlight */
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.signup-link:hover {
+    color: #fcae47; /* Sedikit lebih terang saat dihover */
+}
+
+/* --- PERBAIKAN DIVIDER UNTUK SOCIAL LOGIN --- */
+
+.divider {
+    text-align: center;
+    margin: 30px 0 15px 0; /* Jarak atas bawah dari elemen di sekitar */
+    font-size: 0.8em;
+    color: #888;
+    /* Jika Anda ingin garis horizontal di samping teks "or sign in with", gunakan pseudo-element */
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Jarak antar ikon */
+}
+
+.icons img {
+    width: 30px; /* Atur ukuran ikon sosial */
+    height: 30px;
 }

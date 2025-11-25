@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #1c1c1c;
+    color: white;
+    font-family: 'Arial Rounded MT', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.title {
+    margin-top: 200px;
+    font-size: 64px;
+    font-weight: 900;
+}
+
+.subtitle {
+    font-size: 26px;
+    margin-top: -10px;
+    line-height: 1.4;
+}
+
+.buttons {
+    margin-top: 40px;
+}
+
+.btn {
+    display: inline-block;
+    width: 260px;
+    padding: 18px 0;
+    border-radius: 12px;
+    background: white;
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 196, 33, 0.6);
+
+}
+
+.or {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.small {
+    font-size: 18px;
+}
+
+/* ============================
+   ANIMASI FLOATING
+   ============================ */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0); }
+}
+
+/* WRAPPER = posisi tetap */
+.food-wrapper {
+    position: absolute;
+    pointer-events: none;
+}
+
+.top-left  { top: 20px; left: 20px; width: 360px; }
+.top-right { top: 20px; right: 20px; width: 300px; }
+.bottom-left  { bottom: 20px; left: 20px; width: 350px; }
+.bottom-right { bottom: 20px; right: 20px; width: 320px; }
+
+.food-wrapper img {
+    width: 100%;
+    animation: float 4s ease-in-out infinite;
+}
+
+
+/* Gambar di dalam wrapper bergerak */
+.food-wrapper img {
+    width: 100%;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* POSISI GAMBAR */
+.top-left { top: -170px; left: 40px; }
+.top-right { top: -200px; right: 0px; }
+.bottom-left { bottom: 150px; left: 0px; }
+.bottom-right { bottom: 170px; right: 30px; }
+
+/* DELAY BEDA-BEDA */
+.top-left img { animation-delay: 0s; }
+.top-right img { animation-delay: 0.7s; }
+.bottom-left img { animation-delay: 1.4s; }
+.bottom-right img { animation-delay: 2s; }

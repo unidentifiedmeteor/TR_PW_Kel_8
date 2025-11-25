@@ -64,16 +64,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <button type="submit" class="btn-login">Sign In</button>
 
+                    
+                    <p class="signup-prompt">Belum punya akun? 
+                        <a href="signup.php" class="signup-link">Sign Up</a>
+                    </p>
+ 
                     <div class="divider">or sign in with</div>
-
                     <div class="icons">
                         <img src="gambar_makanan/fb.png">
                         <img src="gambar_makanan/gugel.png">
                     </div>
-                </form>
+
+                </form>            
+                    
 
             </div>
         </div>
+                    
 
     </div>
 </div>

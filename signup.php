@@ -72,10 +72,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <button type="submit" class="btn-login">Sign Up</button>
 
-                    <div class="divider">sudah punya akun?</div>
-
+                    <p class="signup-prompt">Sudah punya akun? 
+                        <a href="login.php" class="signup-link">Login</a>
+                    </p>
+ 
+                    <div class="divider">or sign un with</div>
                     <div class="icons">
-                        <a href="login.php" style="color:orange; text-decoration:none; font-size: 22px; font-weight: bold;">Login</a>
+                        <img src="gambar_makanan/fb.png">
+                        <img src="gambar_makanan/gugel.png">
                     </div>
 
                 </form>
