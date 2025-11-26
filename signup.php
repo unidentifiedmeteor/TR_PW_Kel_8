@@ -6,24 +6,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST["username"];
     $password = $_POST["password"];
 
+    // Cek username sudah digunakan atau belum
     $result = $conn->prepare("SELECT id FROM roles WHERE username = ?");
     $result->bind_param("s", $username);
     $result->execute();
     $result->store_result();
 
     if($result->num_rows > 0){
-        echo "<br>"."Username sudah ada yang pakai";
+        $error = "Username sudah dipakai!";
     } else {
+        // Insert user baru dengan role otomatis "user"
         $stmt = $conn->prepare("INSERT INTO roles (username, password, role) VALUES (?, ?, 'user')");
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
-        echo "YES berhasil sign up! Kembali ke login...";
+
+        echo "Berhasil Sign Up! Pindah ke login...";
         echo "<script>
             setTimeout(function(){
                 window.location.href = 'login.php';
-            }, 3000);
+            }, 2000);
         </script>";
-        // Nunggu 3 detik habis gitu langsung pindah ke login
         exit;
     }
 }
@@ -35,24 +37,58 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Sign Up - Westo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="body-signup">
-    <div class="signup">
-        <h2>Sign Up</h2>
-        <form method="post">
-            <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" required><br><br>
-            <button type="submit">Sign Up</button>
-            <a href="login.php">Login</a>
-            <p>Nanti admin sama kasir bisa ditambah dari admin. Jadi sign up rolenya auto jadi user.</p>
-        </form>
+<body>
+
+<div class="container">
+    <div class="main-box">
+
+        <!-- Bagian kiri -->
+        <div class="left">
+            <h1 class="logo">Westo</h1>
+            <img src="gambar_makanan/img1.png" class="food-img">
+        </div>
+
+        <!-- Bagian kanan -->
+        <div class="right">
+            <div class="login-card">
+
+                <h2 class="title">Sign Up</h2>
+
+                <?php if(isset($error)) : ?>
+                    <div class="error"><?= $error ?></div>
+                <?php endif; ?>
+
+                <form method="post">
+
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Buat username" required>
+
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Buat password" required>
+
+                    <button type="submit" class="btn-login">Sign Up</button>
+
+                    <p class="signup-prompt">Sudah punya akun? 
+                        <a href="login.php" class="signup-link">Login</a>
+                    </p>
+ 
+                    <div class="divider">or sign un with</div>
+                    <div class="icons">
+                        <img src="gambar_makanan/fb.png">
+                        <img src="gambar_makanan/gugel.png">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
 
     </div>
-</body>
+</div>
 
+</body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Daftar Mahasiswa</h1>
+    <form action="">
+        <label for="">NIM : </label><br>
+        <input type="text" name="NIM" id="nimInput">
+        <br><br>
+        <label for="Nama">Nama Mahasiswa : </label><br>
+        <input type="text" name="Nama" id="namaInput">
+        <br><br>
+        <label for="Email">Email : </label><br>
+        <input type="email" name="email" id="emailInput">
+        <br><br>
+        <button>Tambah</button>
+    </form>
+
+    <h2>Daftar Mahasiswa</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="daftarItems"></tr>
+        </tbody>
+    </table>
+    
+    <script src="Latihan1.js" ></script>
+</body>
+</html>

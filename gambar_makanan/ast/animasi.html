@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #output {
+            font-size: 24px;
+            font-family: 'Courier New', Courier, monospace;
+            color: darkcyan
+            margin-top: 20px;
+            border-right: 2px solid #000;
+            padding-right: 2px;
+            width: fit-content;
+            white-space: pre-wrap; 
+        }
+    </style>
+</head>
+<body>
+    <h2>animasi</h2>
+    <div id="output"></div>
+
+    <script>
+        const teks = "Selamat datang di dunia animasi JavaScript!";
+        let index = 0;
+
+        function ketik() {
+            if (index < teks.length) {
+                document.getElementById("output").innerHTML += teks.charAt(index);
+                index++;
+                setTimeout(ketik, 120); 
+            }
+        }
+
+        ketik();
+    </script>
+</body>
+</html>

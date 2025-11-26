@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Daftar Mahasiswa</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e6f7ff; /* Biru sangat muda */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1565c0; /* Biru Gelap */
+        }
+        #inputForm {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #inputForm input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            flex-grow: 1;
+        }
+        #tombolTambah {
+            padding: 10px 15px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* Style untuk Daftar Items */
+        .header-list, .list-item {
+            display: grid;
+            /* Definisikan 4 kolom: NIM, Nama, Email, Tombol Aksi */
+            grid-template-columns: 1fr 2fr 3fr 1.5fr; 
+            align-items: center;
+            padding: 10px;
+        }
+        .header-list {
+            font-weight: bold;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .list-item {
+            border-bottom: 1px dashed #eee;
+        }
+        .action-btn {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            color: white;
+        }
+        .edit-btn { background-color: #ff9800; } /* Oranye */
+        .delete-btn { background-color: #e53935; } /* Merah */
+        
+        /* Gaya Fitur Tambahan */
+        #fiturTambahan {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        #cariInput {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #tombolSortir {
+            background-color: #4caf50; /* Hijau */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Manajemen Daftar Mahasiswa 🎓</h1>
+        
+        <div id="inputForm">
+            <input type="hidden" id="editItemId" value=""> 
+            
+            <input type="text" id="nimInput" placeholder="NIM" required>
+            <input type="text" id="namaInput" placeholder="Nama Mahasiswa" required>
+            <input type="email" id="emailInput" placeholder="Email" required>
+            <button id="tombolTambah" onclick="handleFormSubmission()">Tambah</button>
+        </div>
+
+        <div id="fiturTambahan">
+            <input type="text" id="cariInput" placeholder="Cari Nama/NIM/Email..." onkeyup="cariItem()">
+            <button id="tombolSortir" onclick="sortirItem()">Sortir Nama A-Z</button>
+        </div>
+
+        <h2>Daftar Mahasiswa</h2>
+        
+        <div class="header-list">
+            <span>NIM</span>
+            <span>Nama</span>
+            <span>Email</span>
+            <span>Aksi</span>
+        </div>
+
+        <ul id="daftarItems">
+            </ul>
+    </div>
+
+    <script src="latihan.js"></script> 
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tombol Interaktif</title>
+  <style>
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      margin: 0;
+      padding: 40px;
+    }
+
+    h2 {
+      color: #343a40;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    #pesan {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #28a745;
+      opacity: 1; 
+      transition: opacity 1s ease-in-out;
+    }
+
+    .muncul {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h2>Tombol Interaktif</h2>
+  <button onclick="tampilkanPesan()">Klik Saya</button>
+  <p id="pesan"></p>
+
+  <script>
+    function tampilkanPesan() {
+
+      let pesan = document.getElementById("pesan");
+      
+      pesan.innerHTML = "Tombol telah diklik!";
+      
+      pesan.classList.add("muncul");
+    }
+  </script>
+</body>
+</html>
