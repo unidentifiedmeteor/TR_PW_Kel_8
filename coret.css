@@ -1,235 +1,51 @@
-:root {
-  --accent:#d6f23c;
-  --dark:#151515;
-  --muted:#9a9a9a;
-}
-
-/* GLOBAL */
 body {
-  font-family: Montserrat, Arial, sans-serif;
-  margin: 0;
-  background: linear-gradient(#1a1a1a,#2b2b2b);
-  color: #fff;
+    margin: 0;
+    background: #2F2F2F;
+    font-family: Arial, sans-serif;
+    color: white;
 }
 
-
-/* NAV */
-.nav {
-  display: flex;
-  /* Membuat jarak yang merata antara 3 elemen: Brand, Menu, dan Tombol */
-  justify-content: space-between;
-  align-items: center;
-  /* Atur padding agar ada ruang di kiri dan kanan layar */
-  padding: 22px 80px; 
-  position: fixed;
-  /* Width harus 100% agar memenuhi layar */
-  width: 90%; 
-  /* Hapus width:100% dari body/hero untuk mencegah overlap */
-  z-index: 50;
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+.container {
+    text-align: center;
+    padding-top: 50px;
 }
 
-/* MENU LINKS */
-.menu-links {
-  display: flex;
-  /* Margin auto akan mendorongnya ke tengah di antara Brand dan Tombol */
-  margin: 0 auto;
+.back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
 }
 
-/* RIGHT ACTION (Pembungkus tombol) */
-.right-action {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.profile-card {
+    margin-top: 80px;
 }
 
-/* Tombol */
-.btn-book { 
-  background: var(--accent);
-  color: #000;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap; /* Penting: Mencegah tombol melompat baris jika ruang sempit */
-}
-
-
-/* Revisi link di dalam nav */
-.nav a {
-  color: #eee;
-  text-decoration: none;
-  /* Atur margin-right agar link memiliki jarak */
-  margin-right: 16px;
-  /* Atur padding agar mudah di klik/sentuh */
-  padding: 8px 10px;
-}
-
-/* Hapus margin-right di sini karena sudah diatur di .nav a */
-/* Anda bisa menghapus baris di bawah ini dari CSS Anda yang lama:
-.nav a { color:#eee;text-decoration:none;margin-right:16px; }
-*/
-/* Brand di kiri */
-.brand {
-  font-weight: 700;
-  font-size: 1.5em; /* Ukuran yang sedikit lebih besar */
-}
-
-.nav a:hover {
-  color: var(--accent);
-}
-
-.nav .btn-book:hover {
-  background: #7e9217;
-}
-
-/* CSS untuk menyembunyikan/menampilkan navbar */
-
-/* Tambahkan transisi agar pergerakan halus */
-.nav {
-    /* Pastikan Anda menambahkan transisi ini ke .nav yang sudah ada */
-    transition: transform 0.3s ease-in-out; 
-}
-
-/* Class baru untuk menyembunyikan navbar (menggesernya ke atas) */
-.nav.hidden {
-    transform: translateY(-100%); /* Geser ke atas sejauh 100% tinggi navbar */
-}
-
-
-/* HERO */
-.hero {
-  display:flex;
-  padding:140px 6% 100px;
-  gap:40px;
-  background: url('gambar_makanan/bg2.png') no-repeat center/cover;
-}
-
-.hero-left { 
-    flex:1;
-    margin-left: 60px;
-    margin-top: 20px;
- }
-.pretitle { color:var(--accent);font-weight:700; font-size: 20px; }
-h1 { font-family:'Playfair Display'; font-size:65px; margin:0; }
-h1 strong { display:block; font-size:80px; }
-.lead { color:#e2e2e2;margin:16px 0; font-size: 18px; line-height: 1.6; }
-
-.btn-find {
-  background:var(--accent);
-  padding:12px 20px;
-  border-radius:25px;
-  border:none;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.btn-find:hover {
-    background:#7e9217;
-}
-
-.hero-right { width:460px;display:flex;justify-content:center; }
-.hero-card {
-  width:420px;height:420px;border-radius:50%;
-  box-shadow:0 30px 60px rgba(0,0,0,0.6);
-  display:flex;align-items:center;justify-content:center;
-}
-.hero-card img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  position: relative; 
-  z-index: 2;
-
-  /* PENTING: Tambahkan properti animasi di sini */
-  animation: slowRotate 30s linear infinite; 
-  /*
-    - slowRotate: Nama keyframes yang kita buat.
-    - 30s: Durasi rotasi. Ubah nilai (misalnya 40s atau 60s) untuk membuat putaran lebih lambat.
-    - linear: Kecepatan konstan (tidak dipercepat/diperlambat).
-    - infinite: Animasi berulang tanpa henti.
-  */
-}
-@keyframes slowRotate {
-  from {
-    transform: rotate(0deg); /* Mulai dari 0 derajat */
-  }
-  to {
-    transform: rotate(360deg); /* Berakhir di 360 derajat (satu putaran penuh) */
-  }
-}
-
-
-
-/* SECTION */
-.section {
-  padding:115px 10%;
-  display:flex;
-  align-items:center;
-  gap:40px;
-  
-}
-.section.alt { background:#2b2b2b; }
-.section .media img {
-  width:60%;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,0.6);
-  margin-left: 50px;
-}
-.section .content h2 {
-  font-family:'Playfair Display';
-  font-size:35px;
-}
-.accent { color:var(--accent); }
-.find-more {
-  display:inline-block;
-  background:var(--accent);
-  padding:10px 18px;
-  border-radius:20px;
-  margin-top:14px;
-  color:#000;
-  font-weight:700;
-}
-
-/* CHEF */
-.chef {
-  padding:150px 6%;
-  display:flex;
-  gap:40px;
-}
-.chef-photo {
-  width:290px;height:290px;border-radius:50%;overflow:hidden;
-  border:8px solid rgba(255,255,255,0.1);
-}
-.chef-photo img { width:100%;height:100%;object-fit:cover; }
-
-/* TESTIMONIALS */
-.testi-wrap { background:#3f3f3f;padding:150px 6%; }
-.testi-wrap h3 {
-  text-align:center;font-family:'Playfair Display';
-}
-.testi-desc {
-  text-align:center;color:#ddd;max-width:900px;margin:auto;
-}
-.testi-grid {
-  display:flex;gap:24px;justify-content:center;margin-top:40px;
-}
-.testi {
-  background:#fff;color:#000;
-  padding:20px;border-radius:18px;
-  width:320px;position:relative;
-}
 .avatar {
-  width:64px;height:64px;border-radius:50%;
-  overflow:hidden;position:absolute;left:20px;top:-32px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
-.space { height:20px; }
 
-/* FOOTER */
-footer {
-  background:#dcdcdc;color:#000;padding:30px 6%;
+h1 {
+    margin-top: 20px;
+    font-size: 28px;
 }
-.footer-wrap {
-  display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+
+p {
+    font-size: 20px;
+    color: #cccccc;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 40px;
+    background: #E53935;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    text-decoration: none;
 }

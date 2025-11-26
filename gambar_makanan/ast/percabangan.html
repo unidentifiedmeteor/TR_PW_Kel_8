@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>percabangan</h2>
+    <p id="kategori"></p>
+
+    <script>
+        let umur = 17;
+        let kategori;
+
+        if (umur < 13) {
+            kategori = "Anak-anak";
+        } else if (umur >= 13 && umur < 20) {
+            kategori = "Remaja";
+        } else if (umur >= 20 && umur < 60) {
+            kategori = "Dewasa";
+        } else {
+            kategori = "Lansia";
+        }
+
+        document.getElementById("kategori").innerHTML =
+            "Umur: " + umur + "<br>" +
+            "Kategori: " + kategori;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Nilai Mahasiswa</title>
+
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* biru muda */
+            margin: 0 0 50px 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            background-color: #1e90ff; /* biru */
+            color: white;
+            padding: 30px;
+            margin: 0 0 25px 0;
+        }
+        form {
+            width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, button {
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 13px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input:focus, select:focus {
+            border-color: #1e90ff;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(30, 144, 255, 0.5);
+        }
+        button {
+            width: 60%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button[type="submit"] {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+        }
+        button[type="submit"]:hover {
+            background-color: #005cbf;
+        }
+        button[type="reset"] {
+            background-color: #ff6161;
+            color: #ffffff;
+            border: none;
+        }
+        button[type="reset"]:hover {
+            background-color: #af4b4b;
+        }
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Form Input Nilai Mahasiswa</h2>
+    <form action="#" method="post">
+        <!-- Nama mahasiswa -->
+         <label for="Nama"> Nama Mahasiswa:</label><br>
+         <input type="text" id="Nama" name="Nama" placeholder="Masukkan nama" required><br><br>
+        
+         <!-- NIM -->
+          <label for="Nim">NIM: </label><br>
+          <input type="number" id="Nim" name="Nim" placeholder="Masukkan NIM" required><br><br>
+
+          <!-- Matkul -->
+            <label for="Matkul">Mata Kuliah: </label><br>
+            <select id="matkul" name="matkul"  required> Pilih mata kuliah <br>
+                <option value=""> Pilih mata kuliah </option> 
+                <option value="matkul1">Pemrograman Web</option>
+                <option value="matkul2">Kecerdasan Buatan</option>
+                <option value="matkul3">Dasar Pemrograman Jaringan</option>
+                <option value="matkul1">Pemrograman Berorientasi Objek</option>
+                <option value="matkul2">Matematika Diskrit</option>
+                <option value="matkul3">Sistem Basis Data</option>
+                <option value="matkul1">Algoritma dan Struktur Data</option>
+                <option value="matkul2">Statistika dan Probabilitas</option>
+                <option value="matkul3">Bahasa Indonesia</option>
+                <option value="matkul1">Bahasa Inggris</option>
+                <option value="matkul2">Pancasila</option>
+                <option value="matkul3">Agama</option>
+                
+            </select><br><br>
+
+            <!-- Nilai -->
+            <label for="Nilai">Nilai Tugas: </label><br>
+            <input type="number" id="Nilai" name="Nilai" min="0" max="100" placeholder="0 - 100" required><br><br>
+            
+            <label for="Nilai">Nilai Quiz: </label><br>
+            <input type="number" id="Nilai" name="Nilai" min="0" max="100" placeholder="0 - 100" required><br><br>
+            
+            <label for="Nilai">Nilai TTS: </label><br>
+            <input type="number" id="Nilai" name="Nilai" min="0" max="100" placeholder="0 - 100" required><br><br>
+            
+            <label for="Nilai">Nilai TR: </label><br>
+            <input type="number" id="Nilai" name="Nilai" min="0" max="100" placeholder="0 - 100" required><br><br>
+
+            <!-- Tombol -->
+            <div style="text-align: center;">
+                <button type="submit">Kirim</button> <br>
+                <button type="reset">Reset</button>
+            </div>
+            </form>
+
+            <footer>
+                By Khulud Zuliyani
+            </footer>
+
+</body>
+
+</html>

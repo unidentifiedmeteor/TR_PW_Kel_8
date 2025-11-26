@@ -56,43 +56,61 @@ body {
 
 /* CONTAINER UTAMA */
 .container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   width: 100%;
+   min-height: 100vh;
+   /* Pastikan ini ada untuk pemusatan di tengah layar */
+   display: flex; 
+   justify-content: center; 
+   align-items: center;
 }
 
 /* CARD BESAR (KIRI + KANAN) */
 .main-box {
-    width: 90%;
-    max-width: 1350px;
-    height: 85vh;
-    display: flex;
-    background-color: rgba(20, 20, 20, 0.877);
-    border-radius: 35px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.25);
-    overflow: hidden;
+ width: 90%;
+ max-width: 1050px;
+ /* REVISI PENTING: Gunakan min-height agar box bisa memanjang jika konten meluap */
+ min-height: 85vh; 
+    height: auto; /* Biarkan tinggi diatur oleh konten, minimum 85vh */
+ 
+ display: flex;
+ background-color: rgba(20, 20, 20, 0.877);
+ border-radius: 35px;
+ box-shadow: 0 0 40px rgba(0,0,0,0.25);
+ overflow: hidden;
 }
 
 /* BAGIAN KIRI */
 .left {
-    width: 50%;
-    display: flex;
-    flex-direction: column;                 /* atas ke bawah */
-    justify-content: center;                /* vertical center */
-    align-items: center;                    /* horizontal center */
-    gap: 10px;                              /* jarak antar elemen */
-    padding: 20px;
-    text-align: center;
+   /* REVISI: Tetapkan width menjadi 45% atau 50% */
+   width: 45%; 
+   display: flex;
+   flex-direction: column; 
+   justify-content: center; 
+   align-items: center; 
+   gap: 10px; 
+   padding: 30px;
+   text-align: center;
+    /* Tambahkan background image di sini jika ingin hanya di sebelah kiri */
+    /* background: url('gambar_makanan/kiri_bg.jpg') no-repeat center/cover; */
+}
+
+/* BAGIAN KANAN */
+.right {
+   /* REVISI: Tetapkan width agar total 100% (45% + 55% = 100%) */
+   width: 55%; 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 45px 25px;
 }
 
 /* Tulisan WESTO */
 .left .logo {
-    font-size: 80px;
-    font-weight: 700;
+    font-size: 60px;
+    font-weight: 600;
     color: white;
-    margin: 0;                               /* hapus jarak bawaan */
+    margin: 0;  
+    margin-top: 25px;                             /* hapus jarak bawaan */
 }
 
 /* Gambar makanan */
@@ -104,14 +122,6 @@ body {
 }
 
 
-/* BAGIAN KANAN */
-.right {
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
-}
 
 /* CARD LOGIN */
 .login-card {
@@ -123,9 +133,11 @@ body {
     color: white;
 }
 
+
+
 .title {
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 30px;
 }
 
@@ -231,3 +243,4 @@ input {
     width: 30px; /* Atur ukuran ikon sosial */
     height: 30px;
 }
+

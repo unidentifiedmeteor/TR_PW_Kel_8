@@ -1,14 +1,13 @@
 <?php
-$host="localhost";
-$user="root";
-$pass="";
-$db = "tr_pwrestoran";
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "tr_pwrestoran";
 
-$conn = new mysqli(hostname: $host, username: $user, password: $pass, database:$db);
+$conn = new mysqli($host, $user, $pass, $db);
 
-if($conn){
-    echo "Koneksi berhasil";
-} else {
-    echo "Koneksi gagal";
+// Jika koneksi gagal
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 ?>

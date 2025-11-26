@@ -2,7 +2,8 @@
 session_start();
 require "koneksiDB.php";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $username = $_POST["username"];
     $password = $_POST["password"];
 
@@ -12,26 +13,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $result = $stmt->get_result();
 
-    if($result->num_rows > 0){
+    if ($result->num_rows > 0) {
+
         $user = $result->fetch_assoc();
 
+        // Simpan ke session
         $_SESSION["id"] = $user["id"];
         $_SESSION["username"] = $user["username"];
         $_SESSION["role"] = $user["role"];
 
-        if($user["role"] == "admin"){
+        // Redirect sesuai role
+        if ($user["role"] == "admin") {
             header("Location: admin_home.php");
-        } else if($user["role"] == "kasir"){
+        } 
+        else if ($user["role"] == "kasir") {
             header("Location: kasir_home.php");
-        } else {
+        } 
+        else {
             header("Location: user_home.php");
         }
         exit;
+
     } else {
         $error = "Username atau password salah";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
