@@ -17,7 +17,7 @@ $role     = $_SESSION["role"];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="stylesheet" href="coret.css">
+    <link rel="stylesheet" href="profil.css">
 </head>
 <body>
 
