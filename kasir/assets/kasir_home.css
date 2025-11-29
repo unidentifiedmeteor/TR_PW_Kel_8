@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0e0e0e;
+    color: white;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #000;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    border-bottom: 2px solid #222;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
+
+nav a {
+    color: white;
+    margin-right: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    padding-bottom: 4px;
+}
+
+nav a.active {
+    border-bottom: 2px solid #d7ff19;
+}
+
+nav a:hover {
+    color: #d7ff19;
+}
+
+.btn-logout {
+    background: #d7ff19;
+    border: none;
+    padding: 8px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    filter: brightness(0.85);
+}
+
+.hero {
+    text-align: center;
+    padding: 140px 0;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: #d7ff19;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.btn-main {
+    background: #d7ff19;
+    padding: 15px 28px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-main:hover {
+    filter: brightness(0.8);
+}
+
+
+footer {
+    background: #d7ff19;
+    color: black;
+    text-align: center;
+    padding: 15px 0;
+    font-weight: 700;
+    margin-top: 180px;
+}
+
+
+
+@media (max-width: 900px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-left {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 3px 10px;
+        font-size: 16px;
+    }
+
+    .hero {
+        padding: 100px 20px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .btn-main {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+
+    footer {
+        margin-top: 100px;
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .btn-main {
+        width: 100%;
+    }
+}
