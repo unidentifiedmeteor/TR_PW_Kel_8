@@ -161,7 +161,8 @@ if (!empty($_SESSION['cart'])) {
 
             <form method="POST">
                 <!-- tombol checkout -->
-                <button type="submit" name="checkout" class="btn-checkout">
+               <button type="submit" name="checkout" value="1" class="btn-checkout">
+
                     Checkout
                 </button>
             </form>
