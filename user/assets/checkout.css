@@ -1,0 +1,139 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #111;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* bar bagian atas */
+.checkout-header {
+    width: 100%;
+    background: #111;
+    display: flex;
+    align-items: center;
+    padding: 25px 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.4);
+}
+
+.checkout-header .logo {
+    font-size: 35px;
+    font-weight: 600;
+    color: white;
+}
+
+/* layout utama halaman checkout */
+.checkout-section {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.checkout-section h1 {
+    font-size: 42px;
+    color: #d1ff32;
+    margin-bottom: 20px;
+}
+
+/* teks kode pesanan */
+.code {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.code span {
+    color: #d1ff32;
+    font-weight: 700;
+}
+
+/* kotak daftar pesanan */
+.checkout-container {
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #000;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+/* 1 baris item makanan */
+.list {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #333;
+}
+
+.list:last-child {
+    border-bottom: none;
+}
+
+/* total harga */
+.total {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    color: #d1ff32;
+}
+
+/* pesan info user */
+.info {
+    margin-top: 30px;
+    font-size: 20px;
+    color: #bbb;
+    font-weight: 600;
+}
+
+/* tombol kembali */
+.btn-back {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 20px;
+    background: #d1ff32;
+    color: #111;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #b4e027;
+}
+
+/* footer di bawah halaman */
+.footer {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+    padding: 22px 0;
+    background:#d1ff32;
+    color: #444;
+    font-size: 14px;
+    font-weight: 600;
+    border-top: 1px solid rgba(0,0,0,0.12);
+}
+
+/* responsive */
+@media (max-width: 480px) {
+    .checkout-header .logo {
+        font-size: 28px;
+    }
+
+    .checkout-section h1 {
+        font-size: 33px;
+    }
+
+    .info {
+        font-size: 18px;
+    }
+}
