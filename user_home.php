@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-// Cek apakah user sudah login
+// cek user sudah login
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 ?>
-
 
 <!doctype html>
 <html lang="id">
@@ -16,29 +15,32 @@ if (!isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Western Restaurant — Landing</title>
 
-  <!-- Hubungkan CSS -->
+  <!-- CSS -->
   <link rel="stylesheet" href="home.css" />
 
-  <!-- Google Fonts -->
+  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- NAV -->
-        <nav class="nav">
-        <div class="brand">Westo</div>
-        <div class="menu-links">
-            <a href="#menu">Menu</a>
-            <a href="#orders">Orders</a>
-            <a href="#testi">Testi</a>
-        </div>
-        <div class="right-action">
-            <button class="btn-book">Booking Delivery</button>
-            <img src="gambar_makanan/cart.png" class="cart-icon" href="#">
-            <a href="user_profile.php"><img src="gambar_makanan/profile.png " class="profil-icon"></a>            
-        </div>
-        </nav>
+  <nav class="nav">
+      <div class="brand">Westo</div>
+
+      <div class="menu-links">
+          <a href="user/pages/menu.php">Menu</a>
+          <a href="user/pages/orders.php">Orders</a>
+          <a href="#testi">Testi</a>
+      </div>
+
+      <div class="right-action">
+          <button class="btn-book">Booking Delivery</button>
+          <a href="user_profile.php">
+              <img src="gambar_makanan/profile.png" class="profil-icon">
+          </a>            
+      </div>
+  </nav>
 
   <!-- HERO -->
   <header class="hero" id="top">
@@ -51,7 +53,6 @@ if (!isset($_SESSION['username'])) {
 
     <div class="hero-right">
       <div class="hero-card">
-        <!-- Ganti gambar sesuai kebutuhan -->
         <img src="gambar_makanan/pizza2.jpg" alt="Pizza" />
       </div>
     </div>
@@ -133,9 +134,9 @@ if (!isset($_SESSION['username'])) {
     </div>
   </footer>
 
-  <!-- Smooth Scroll -->
+  <!-- SMOOTH SCROLL -->
   <script>
-    document.querySelectorAll('a[href^=\"#\"]').forEach(a=>{
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{
         e.preventDefault();
         const t=document.querySelector(a.getAttribute('href'));
@@ -144,21 +145,14 @@ if (!isset($_SESSION['username'])) {
     })
 
     const navbar = document.querySelector('.nav');
-    let lastScrollY = window.scrollY; // Simpan posisi guliran terakhir
+    let lastScrollY = window.scrollY;
 
     window.addEventListener('scroll', () => {
-        // Jika posisi guliran saat ini (window.scrollY) lebih besar dari posisi guliran terakhir (lastScrollY), 
-        // artinya pengguna sedang menggulir ke BAWAH.
         if (window.scrollY > lastScrollY) {
-            navbar.classList.add('hidden'); // Sembunyikan navbar
-        } 
-        // Jika posisi guliran saat ini lebih kecil, atau jika guliran kembali ke atas,
-        // artinya pengguna sedang menggulir ke ATAS.
-        else {
-            navbar.classList.remove('hidden'); // Tampilkan navbar
+            navbar.classList.add('hidden');
+        } else {
+            navbar.classList.remove('hidden');
         }
-
-        // Perbarui posisi guliran terakhir untuk perbandingan di iterasi berikutnya
         lastScrollY = window.scrollY;
     });
   </script>
