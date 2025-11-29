@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    background: #2F2F2F;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+}
+
+.profile-card {
+    margin-top: 80px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+p {
+    font-size: 20px;
+    color: #cccccc;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 40px;
+    background: #E53935;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}

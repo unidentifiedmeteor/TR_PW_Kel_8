@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Inventaris Gudang CRUD</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f8f6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 40px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 700px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #369e39;
+      margin-bottom: 20px;
+    }
+
+    h3{
+       text-align: left; 
+    }
+    .form-section input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #tambahBtn {
+      background-color: #5d9b4e;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #tambahBtn:hover {
+      background-color: #256427;
+    }
+
+    .daftar {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #eef7ef;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+    }
+
+    .item-nama {
+      font-weight: bold;
+      flex: 1;
+    }
+
+    .item-stok {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stok-btn {
+      background-color: #2f7a32;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      width: 25px;
+      height: 25px;
+      margin-right: 3px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .stok-btn:hover {
+      background-color: #256427;
+    }
+
+    .delete-btn {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 9px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #b52b27;
+    }
+
+    .total {
+      background-color: #e8f5e9;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2f7a32;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Sistem Inventaris Gudang CRUD 📦</h2>
+
+    <div class="form-section">
+      <input type="text" id="namaBarang" placeholder="Nama Barang Baru" />
+      <input type="number" id="stokBarang" placeholder="Stok Awal" />
+      <button id="tambahBtn" onclick="tambahItem()">Tambah Barang</button>
+    </div>
+
+    <hr />
+
+    <h3>Daftar Stok Barang</h3>
+    <ul id="daftarBarang" class="daftar"></ul>
+
+    <div id="totalStok" class="total">Total Stok: 0 unit</div>
+  </div>
+
+  <script src="GUDANG.js"></script>
+</body>
+</html>

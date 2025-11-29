@@ -1,0 +1,246 @@
+.body {
+    padding-top: 30px;
+}
+
+.body.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login {
+    background-color: yellow;
+    width: fit-content;
+}
+
+.navbar-admin {
+    background-color: yellow;
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.menu-semuanya {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.body.admin {
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.adminhome{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+
+
+/* SIGN IN & SIGN */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('gambar_makanan/bg.png') no-repeat center center;
+}
+
+/* CONTAINER UTAMA */
+.container {
+   width: 100%;
+   min-height: 100vh;
+   /* Pastikan ini ada untuk pemusatan di tengah layar */
+   display: flex; 
+   justify-content: center; 
+   align-items: center;
+}
+
+/* CARD BESAR (KIRI + KANAN) */
+.main-box {
+ width: 90%;
+ max-width: 1050px;
+ /* REVISI PENTING: Gunakan min-height agar box bisa memanjang jika konten meluap */
+ min-height: 85vh; 
+    height: auto; /* Biarkan tinggi diatur oleh konten, minimum 85vh */
+ 
+ display: flex;
+ background-color: rgba(20, 20, 20, 0.877);
+ border-radius: 35px;
+ box-shadow: 0 0 40px rgba(0,0,0,0.25);
+ overflow: hidden;
+}
+
+/* BAGIAN KIRI */
+.left {
+   /* REVISI: Tetapkan width menjadi 45% atau 50% */
+   width: 45%; 
+   display: flex;
+   flex-direction: column; 
+   justify-content: center; 
+   align-items: center; 
+   gap: 10px; 
+   padding: 30px;
+   text-align: center;
+    /* Tambahkan background image di sini jika ingin hanya di sebelah kiri */
+    /* background: url('gambar_makanan/kiri_bg.jpg') no-repeat center/cover; */
+}
+
+/* BAGIAN KANAN */
+.right {
+   /* REVISI: Tetapkan width agar total 100% (45% + 55% = 100%) */
+   width: 55%; 
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 45px 25px;
+}
+
+/* Tulisan WESTO */
+.left .logo {
+    font-size: 60px;
+    font-weight: 600;
+    color: white;
+    margin: 0;  
+    margin-top: 25px;                             /* hapus jarak bawaan */
+}
+
+/* Gambar makanan */
+.food-img {
+    width: 100%;
+    max-width: 500px;                       /* batas maksimal */
+    height: auto;                            /* gambar tetap proporsional */
+    object-fit: contain;                     /* gambar tidak terpotong */
+}
+
+
+
+/* CARD LOGIN */
+.login-card {
+    width: 85%;
+    background: #1d1d1d;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    color: white;
+}
+
+
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+/* INPUT */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+/* BUTTON LOGIN */
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    background: #f5bb4b;
+    color: #a83a2e;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background: #e0a030;
+}
+
+/* PEMBATAS */
+.divider {
+    text-align: center;
+    color: #ccc;
+    margin-top: 12px;
+    margin-bottom: 15px;
+}
+
+/* IKON SOSMED */
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.icons img {
+    width: 35px;
+    cursor: pointer;
+}
+
+.error {
+    background: #ff5252;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* --- TATA LETAK SIGN UP --- */
+
+/* Atur posisi teks "Belum punya akun? Sign Up" agar berada di tengah */
+.signup-prompt {
+    text-align: center;
+    margin-top: 20px; /* Jarak dari tombol Sign In */
+    font-size: 0.95em;
+    color: #ccc; /* Warna teks prompt */
+}
+
+/* Style untuk tautan 'Sign Up' */
+.signup-link {
+    color: #FFC069; /* Warna oranye/emas sebagai highlight */
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.signup-link:hover {
+    color: #fcae47; /* Sedikit lebih terang saat dihover */
+}
+
+/* --- PERBAIKAN DIVIDER UNTUK SOCIAL LOGIN --- */
+
+.divider {
+    text-align: center;
+    margin: 30px 0 15px 0; /* Jarak atas bawah dari elemen di sekitar */
+    font-size: 0.8em;
+    color: #888;
+    /* Jika Anda ingin garis horizontal di samping teks "or sign in with", gunakan pseudo-element */
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Jarak antar ikon */
+}
+
+.icons img {
+    width: 30px; /* Atur ukuran ikon sosial */
+    height: 30px;
+}
+
