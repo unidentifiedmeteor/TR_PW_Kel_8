@@ -3,13 +3,32 @@ require "koneksiDB.php";
 
 session_start();
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
+    header("HTTP/1.1 403 Forbidden");
     echo "WEH bukan admin kok mau masuk?!";
     exit;
 }
 
-define('UPLOAD_DIR_FS', __DIR__ . '/gambar_makanan/');
-define('UPLOAD_DIR_URL', 'gambar_makanan/');
-if (!is_dir(UPLOAD_DIR_FS)) mkdir(UPLOAD_DIR_FS, 0755, true);
+// --- KONSTANTA & SETUP UPLOAD ---
+define('UPLOAD_DIR_FS', __DIR__ . '/food_img/');
+define('UPLOAD_DIR_URL', 'food_img/');
+if (!is_dir(UPLOAD_DIR_FS)) {
+    @mkdir(UPLOAD_DIR_FS, 0755, true); 
+}
+
+/**
+ * Fungsi pembantu untuk menghapus file lama.
+ * $filePath adalah NAMA FILE dari database (contoh: 'menu_burger.jpg')
+ */
+function safeUnlink($filePath) {
+    if ($filePath) { // Cek apakah ada nama file
+        // Gabungkan UPLOAD_DIR_FS (Path Server) dengan NAMA FILE
+        $fullPath = UPLOAD_DIR_FS . $filePath; 
+        
+        if (is_file($fullPath)) {
+            @unlink($fullPath);
+        }
+    }
+}
 
 function handleUpload($fileFieldName, &$err = null) {
     if (!isset($_FILES[$fileFieldName])) return null;
@@ -17,7 +36,6 @@ function handleUpload($fileFieldName, &$err = null) {
 
     if ($file['error'] === UPLOAD_ERR_NO_FILE) return null;
     if ($file['error'] !== UPLOAD_ERR_OK) { $err = "Upload error code {$file['error']}"; return false; }
-
     if ($file['size'] > 5 * 1024 * 1024) { $err = "File too large (max 5MB)"; return false; }
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -33,89 +51,74 @@ function handleUpload($fileFieldName, &$err = null) {
 
     if (!move_uploaded_file($file['tmp_name'], $dest)) { $err = "Gagal save file"; return false; }
 
-    return UPLOAD_DIR_URL . $filename;
+    // HANYA SIMPAN NAMA FILE KE DATABASE
+    return $filename;
 }
 
 
-// --- ADD DATA ---
+// --- ADD DATA & UPDATE DATA & DELETE DATA (Logika sudah benar setelah safeUnlink diperbaiki) ---
+$errMsg = null; 
 if (isset($_POST['tambah'])) {
-    $nama = $_POST['nama'];
-    $harga = $_POST['harga'];
-    $err = null;
+    $nama = trim($_POST['nama']);
+    $harga = (float)$_POST['harga']; 
     $gambarPath = handleUpload('gambar', $err);
-    if ($gambarPath === false) {
-        $errMsg = $err; // upload failed
-    } elseif (!$nama || $harga <= 0) {
+    
+    if ($gambarPath === false) { $errMsg = $err; } 
+    elseif (!$nama || $harga <= 0) { 
         $errMsg = "Nama & harga harus diisi dengan benar.";
-        // cleanup if file was uploaded but validation failed
-        if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
+        if ($gambarPath) safeUnlink($gambarPath); 
     } else {
         $stmt = $conn->prepare("INSERT INTO menu (nama, harga, image_path) VALUES (?, ?, ?)");
-        $stmt->bind_param("sis", $nama, $harga, $gambarPath);
+        $stmt->bind_param("sds", $nama, $harga, $gambarPath);
         if ($stmt->execute()) {
-            // Successful insert -> redirect to avoid form re-submit
             $stmt->close();
             header("Location: " . $_SERVER['PHP_SELF']);
             exit;
         } else {
             $errMsg = "❌ Gagal menambah data: " . $stmt->error;
             $stmt->close();
-            // cleanup uploaded file if DB insert failed
-            if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
+            if ($gambarPath) safeUnlink($gambarPath); 
         }
     }
 }
 
-// --- UPDATE DATA ---
+// ... Logika UPDATE dan DELETE sudah benar setelah safeUnlink di atas diperbaiki ...
 if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $harga = $_POST['harga'];
-    $err = null;
+    $id = (int)$_POST['id'];
+    $nama = trim($_POST['nama']);
+    $harga = (float)$_POST['harga'];
     $gambarPath = handleUpload('gambar', $err);
-    if ($gambarPath === false) {
-        $errMsg = $err;
-    } 
-    elseif (!$nama || $harga == '') {
+    
+    if ($gambarPath === false) { $errMsg = $err; } 
+    elseif (!$nama || $harga <= 0) { 
         $errMsg = "Nama & harga harus diisi dengan benar.";
-        if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
-    } 
-
- else {
-
-        //ambil gambar lama
+        if ($gambarPath) safeUnlink($gambarPath); 
+    } else {
         $stmt = $conn->prepare("SELECT image_path FROM menu WHERE id = ?");
         $stmt->bind_param("i", $id);
-        $stmt->execute();                                                    
-        $res = $stmt->get_result()->fetch_assoc();                           
-        $stmt->close();                                                      
-
-        $oldImage = $res['image_path'] ?? null;  
-
+        $stmt->execute();
+        $res = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+        $oldImage = $res['image_path'] ?? null;
         $imagePath = ($gambarPath === null) ? $oldImage : $gambarPath; 
-
         $stmt = $conn->prepare("UPDATE menu SET nama=?, harga=?, image_path=? WHERE id=?"); 
-        $stmt->bind_param("sssi", $nama, $harga, $imagePath, $id);                           
-
+        $stmt->bind_param("dsi", $nama, $harga, $imagePath, $id); 
         if ($stmt->execute()) {
+            if ($gambarPath !== null && $oldImage) { safeUnlink($oldImage); }
             $stmt->close();
-            header("Location: " . $_SERVER['PHP_SELF']); 
+            header("Location: " . $_SERVER['PHP_SELF']);
             exit;
-        } 
-        else {
+        } else {
             $errMsg = "❌ Gagal update data: " . $stmt->error;
             $stmt->close();
-
-            if ($gambarPath && is_file(__DIR__ . '/' . $gambarPath)) @unlink(__DIR__ . '/' . $gambarPath);
+            if ($gambarPath) safeUnlink($gambarPath);
         }
     }
 }
-
-// --- MODE EDIT ---
+// ... MODE EDIT tetap sama ...
 $editData = null;
 if (isset($_GET['edit'])) {
-    $id = $_GET['edit'];
-    
+    $id = (int)$_GET['edit'];
     $stmt = $conn->prepare("SELECT * FROM menu WHERE id = ?"); 
     $stmt->bind_param("i", $id); 
     $stmt->execute();
@@ -123,19 +126,25 @@ if (isset($_GET['edit'])) {
     $editData = $result->fetch_assoc(); 
     $stmt->close();
 }
-
-// --- DELETE DATA ---
+// ... DELETE DATA tetap sama ...
 if (isset($_GET['hapus'])) {
-    $id = $_GET['hapus'];
+    $id = (int)$_GET['hapus'];
+    $stmt = $conn->prepare("SELECT image_path FROM menu WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $res = $stmt->get_result()->fetch_assoc();
+    $oldImage = $res['image_path'] ?? null;
+    $stmt->close();
     $stmt = $conn->prepare("DELETE FROM menu WHERE id = ?"); 
     $stmt->bind_param("i", $id); 
     $stmt->execute();
     $stmt->close();
+    if ($oldImage) safeUnlink($oldImage);
     header("Location: admin_daftar_menu.php");
     exit;
 }
 
-// Buat READ
+
 $result = $conn->query("SELECT * FROM menu ORDER BY id DESC");
 ?>
 
@@ -144,69 +153,97 @@ $result = $conn->query("SELECT * FROM menu ORDER BY id DESC");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Menu</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <title>Daftar Menu Admin</title>
+    <link rel="stylesheet" href="admin_menu.css"> 
+    </head>
 <body class="body menu">
-    <div class="navbar-admin">
-        <a href="admin_home.php">Home</a>
-        <a href="admin_daftar_menu.php">Menu</a>
-        <a href="admin_profile.php">Profile</a>
-    </div>
-    <h1>Daftar menu</h1>
-    <div class="menu-semuanya">
-        <div class="formCon">
-            <h2><?= $editData ? "Edit Data" : "Tambah Data"; ?></h2>
-            <form method="post" enctype="multipart/form-data">
-                <?php if ($editData): ?>
-                    <input type="hidden" name="id" value="<?= $editData['id']; ?>">
-                <?php endif; ?>
-    
-                Nama:<br>
-                <input type="text" name="nama" value="<?= $editData['nama'] ?? ''; ?>" required><br>
-                Harga:<br>
-                <input type="text" name="harga" value="<?= $editData['harga'] ?? ''; ?>" required><br>
-                Gambar:<br>
-                <input type="file" name="gambar" accept="image/*" <?= empty($editData) ? 'required' : '' ?> ><br>
-    
-                <?php if (!empty($editData)): ?>
-                    <button type="submit" name="update">Update</button>
-                    <a href="admin_daftar_menu.php">Batal</a>
-                <?php else: ?>
-                    <button type="submit" name="tambah">Tambah</button>
-                <?php endif; ?>
-            </form>
+    <header>
+        <div class="nav-left">
+            <div class="logo">Westo</div>
+            <nav>
+                <a href="admin_home.php">Home</a>
+                <a href="admin_daftar_menu.php" class="active">Menu</a>
+            </nav>
         </div>
+        <a href="logout.php" class="btn-logout">Logout</a>
+    </header>
     
-        <div class="tabel-menu">
-            <h2>Menu Makanan</h2>
-            <table border="1" cellpadding="5" cellspacing="0">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Harga</th>
-                    <th>Gambar</th>
-                    <th>Aksi</th>
-                </tr>
-                <?php while ($row = $result->fetch_assoc()): ?>
+    <div class="content-wrapper">
+        <h2>Daftar Menu Makanan</h2>
+        
+        <?php if (!empty($errMsg)): ?>
+            <p class="status-msg error-msg"><?= htmlspecialchars($errMsg); ?></p>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['edit']) && $editData): ?>
+            <p class="status-msg info-msg">Anda sedang dalam mode Edit ID: <?= htmlspecialchars($editData['id']); ?></p>
+        <?php endif; ?>
+        
+        <div class="adminhome menu-wrapper"> 
+            <div class="formCon signupAdmin">
+                <h2><?= $editData ? "Edit Data: " . htmlspecialchars($editData['nama']) : "Tambah Menu Baru"; ?></h2>
+                <form method="post" enctype="multipart/form-data">
+                    <?php if ($editData): ?>
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($editData['id']); ?>">
+                    <?php endif; ?>
+    
+                    <label for="nama">Nama Menu</label>
+                    <input type="text" name="nama" id="nama" value="<?= htmlspecialchars($editData['nama'] ?? ''); ?>" required>
+                    
+                    <label for="harga">Harga (Rp)</label>
+                    <input type="number" step="any" name="harga" id="harga" value="<?= htmlspecialchars($editData['harga'] ?? ''); ?>" required>
+                    
+                    <label for="gambar">Gambar</label>
+                    <input type="file" name="gambar" id="gambar" accept="image/*" <?= empty($editData) ? 'required' : '' ?> >
+    
+                    <?php if (!empty($editData) && !empty($editData['image_path'])): ?>
+                        <div style="margin-top:10px;">
+                            <p style="font-size:12px; color:#aaa; margin-bottom:5px;">Gambar Saat Ini:</p>
+                            <img src="<?= htmlspecialchars(UPLOAD_DIR_URL . $editData['image_path']); ?>" style="width:100px; height:auto; border-radius:5px;">
+                        </div>
+                    <?php endif; ?>
+
+                    <div style="margin-top: 20px;">
+                        <?php if (!empty($editData)): ?>
+                            <button type="submit" name="update" class="btn-main">Update Data</button>
+                            <a href="admin_daftar_menu.php" class="btn-secondary">Batal Edit</a>
+                        <?php else: ?>
+                            <button type="submit" name="tambah" class="btn-main">Tambah Menu</button>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="tabel-menu tabel-roles">
+                <h2>Daftar Menu</h2>
+                <table cellpadding="5" cellspacing="0">
                     <tr>
-                        <td><?= $row['id']; ?></td>
-                        <td><?= $row['nama']; ?></td>
-                        <td><?= $row['harga']; ?></td>
-                        <td>
-                            <?php if (!empty($row['image_path'])): ?>
-                                <img src="<?= htmlspecialchars($row['image_path']); ?>" style="width:100px;height:70px;object-fit:cover">
-                            <?php else: ?>
-                                (no image)
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <a href="?edit=<?= $row['id']; ?>">Edit</a> |
-                            <a href="?hapus=<?= $row['id']; ?>" onclick="return confirm('Yakin ingin hapus data ini?')">Hapus</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Gambar</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Aksi</th>
                     </tr>
-                <?php endwhile; ?>
-            </table>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['id']); ?></td>
+                            <td>
+                                <?php if (!empty($row['image_path'])): ?>
+                                    <img src="<?= htmlspecialchars(UPLOAD_DIR_URL . $row['image_path']); ?>" alt="<?= htmlspecialchars($row['nama']); ?>" style="width:70px;height:50px;object-fit:cover; border-radius:3px;">
+                                <?php else: ?>
+                                    <span style="color:#777;">(no img)</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><?= htmlspecialchars($row['nama']); ?></td>
+                            <td>Rp <?= number_format($row['harga'], 0, ',', '.'); ?></td>
+                            <td class="action-links">
+                                <a href="?edit=<?= htmlspecialchars($row['id']); ?>" class="action-edit">Edit</a> |
+                                <a href="?hapus=<?= htmlspecialchars($row['id']); ?>" onclick="return confirm('Yakin ingin hapus data ini?')">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </table>
+            </div>
         </div>
     </div>
 </body>

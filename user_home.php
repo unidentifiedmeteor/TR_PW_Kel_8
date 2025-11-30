@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
       </div>
 
       <div class="right-action">
-          <button class="btn-book">Booking Delivery</button>
+          <button onclick="location.href='user/pages/menu.php'" class="btn-book">Booking Delivery</button>
           <a href="user_profile.php">
               <img src="gambar_makanan/profile.png" class="profil-icon">
           </a>            
