@@ -9,8 +9,8 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
 }
 
 // --- KONSTANTA & SETUP UPLOAD ---
-define('UPLOAD_DIR_FS', __DIR__ . '/food_img/');
-define('UPLOAD_DIR_URL', 'food_img/');
+define('UPLOAD_DIR_FS', __DIR__ . '/user/food_img/');
+define('UPLOAD_DIR_URL', 'user/food_img/');
 if (!is_dir(UPLOAD_DIR_FS)) {
     @mkdir(UPLOAD_DIR_FS, 0755, true); 
 }
