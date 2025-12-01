@@ -1,102 +1,129 @@
 /* ==================================== */
-/* GLOBAL */
+/* GLOBAL & DEFAULT (DESKTOP) */
 /* ==================================== */
 body {
-  margin: 0;
-  padding: 0;
-  background: #1c1c1c;
-  color: white;
-  font-family: 'Arial Rounded MT', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1c1c1c;
+    color: white;
+    font-family: 'Arial Rounded MT', sans-serif;
 }
 
 .container {
     text-align: center;
     width: 80%;
     min-height: 100vh;
-    margin: 0 auto; 
+    margin: 0 auto;
+    /* Perbaikan: Z-index untuk memastikan teks di atas gambar fixed */
+    position: relative; 
+    z-index: 10;
 }
 
 .title {
- font-size: 64px;
- font-weight: 800;
- margin-top: 80px; 
+    font-size: 64px;
+    font-weight: 800;
+    margin-top: 80px; 
 }
 
 .subtitle {
-  font-size: 26px;
-  margin-top: -10px;
-  line-height: 1.4;
+    font-size: 26px;
+    margin-top: -10px;
+    line-height: 1.4;
 }
 
 .buttons {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .btn {
-  display: inline-block;
-  width: 260px;
-  padding: 18px 0;
-  border-radius: 12px;
-  background: white;
-  color: black;
-  font-size: 28px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.2s ease;
-  /* Tambahkan margin agar tombol terpisah */
-  margin: 8px 0; 
+    display: inline-block;
+    width: 260px;
+    padding: 18px 0;
+    border-radius: 12px;
+    background: white;
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s ease;
+    margin: 8px 0; 
+    box-sizing: border-box;
 }
 
 .btn:hover {
- transform: scale(1.05);
- box-shadow: 0 0 20px rgba(255, 196, 33, 0.6);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 196, 33, 0.6);
 }
 
 .or {
- font-size: 20px;
- margin: 20px 0;
+    font-size: 20px;
+    margin: 20px 0;
 }
 
 .small {
- font-size: 18px;
+    font-size: 18px;
 }
 
 /* ==================================== */
-/* ANIMASI FLOATING */
+/* ANIMASI FLOATING (Desktop) */
 /* ==================================== */
 @keyframes float {
- 0% { transform: translateY(0); }
- 50% { transform: translateY(-18px); }
- 100% { transform: translateY(0); }
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0); }
 }
 
-/* WRAPPER = posisi tetap (relative ke viewport/body) */
 .food-wrapper {
- position: fixed;
- pointer-events: none;
+    position: fixed;
+    pointer-events: none;
+    /* Perbaikan: Gambar di bawah teks */
+    z-index: 1; 
 }
 
-/* PERBAIKAN: Atur lebar gambar */
-.top-left  { width: 360px; }
+.top-left { width: 360px; }
 .top-right { width: 300px; }
 .bottom-left { width: 350px; }
 .bottom-right { width: 320px; }
 
 
 .food-wrapper img {
- width: 100%;
- animation: float 4s ease-in-out infinite;
+    width: 100%;
+    animation: float 4s ease-in-out infinite;
 }
 
-/* PERBAIKAN POSISI GAMBAR */
-/* Gambar harus relatif terhadap viewport/body, jangan gunakan nilai negatif yang terlalu besar */
 .top-left { top: 0px; left: 0px; }
 .top-right { top: 0px; right: 0px; }
 .bottom-left { bottom: 0px; left: 0px; }
 .bottom-right { bottom: 0px; right: 0px; }
 
-/* DELAY BEDA-BEDA */
 .top-left img { animation-delay: 0s; }
 .top-right img { animation-delay: 0.7s; }
 .bottom-left img { animation-delay: 1.4s; }
 .bottom-right img { animation-delay: 2s; }
+
+/* ==================================== */
+/* MEDIA QUERY UNTUK MOBILE (Gambar Hilang) */
+/* ==================================== */
+@media (max-width: 768px) {
+    
+    /* Perintah utama: Sembunyikan gambar di HP */
+    .food-wrapper {
+        display: none;
+    }
+    
+    /* Sesuaikan Container dan Tombol agar responsif di HP */
+    .container {
+        width: 90%;
+    }
+    
+    .btn {
+        width: 90%;
+        max-width: 260px;
+    }
+    
+    /* Opsional: Font judul lebih kecil di HP */
+    .title {
+        font-size: 48px;
+        margin-top: 40px;
+    }
+}

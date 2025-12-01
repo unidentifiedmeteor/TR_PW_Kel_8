@@ -1,86 +1,71 @@
 :root {
-  --accent:#d6f23c;
-  --dark:#151515;
-  --muted:#9a9a9a;
+  --accent: #d6f23c;
+  --dark: #151515;
+  --muted: #9a9a9a;
 }
 
 /* GLOBAL */
 body {
   font-family: Montserrat, Arial, sans-serif;
   margin: 0;
-  background: linear-gradient(#1a1a1a,#2b2b2b);
+  background: linear-gradient(#1a1a1a, #2b2b2b);
   color: #fff;
 }
 
-
-/* NAV */
+/* ==================================== */
+/* NAV BAR */
+/* ==================================== */
 .nav {
   display: flex;
-  /* Membuat jarak yang merata antara 3 elemen: Brand, Menu, dan Tombol */
   justify-content: space-between;
   align-items: center;
-  /* Atur padding agar ada ruang di kiri dan kanan layar */
-  padding: 22px 80px; 
+  padding: 22px 80px;
   position: fixed;
-  /* Width harus 100% agar memenuhi layar */
-  width: 90%; 
-  /* Hapus width:100% dari body/hero untuk mencegah overlap */
+  /* Width diatur agar tidak melebihi viewport */
+  width: 100%; 
+  box-sizing: border-box; /* Penting untuk padding */
   z-index: 50;
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* MENU LINKS */
+.nav.hidden {
+  transform: translateY(-100%);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.5em;
+  /* Tambahkan margin kanan agar tidak menempel ke menu links saat layar kecil */
+  margin-right: 20px; 
+}
+
 .menu-links {
   display: flex;
-  /* Margin auto akan mendorongnya ke tengah di antara Brand dan Tombol */
-  margin: 0 auto;
+  /* Hapus margin auto di sini agar lebih terkontrol di mobile */
+  margin: 0; 
 }
 
-/* RIGHT ACTION (Pembungkus tombol) */
+.nav a {
+  color: #eee;
+  text-decoration: none;
+  margin-right: 16px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
 .right-action {
- display: flex;
- align-items: center;
- gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* 1. STYLING IKON KERANJANG */
-.right-action .cart-icon {
-  width: 32px !important; 
-  height: 32px !important;
- cursor: pointer !important;
-}
-
-/* 2. STYLING GAMBAR PROFIL (IMG.profil-icon) */
-/* Target gambar (img) yang memiliki class .profil-icon */
-.profil-icon { 
- /* PENGATURAN UKURAN DENGAN !IMPORTANT */
- width: 28px !important; 
- height: 28px !important; 
- 
- /* Memastikan dimensi diterapkan */
- display: block !important;
- 
- /* Styling lingkaran */
-  border-radius: 50% !important; 
-  object-fit: cover !important; 
- cursor: pointer !important;
- border: 1px solid var(--accent) !important;
-}
-
-/* 3. Atur tag <a> pembungkus (ini penting untuk tata letak) */
-.right-action a {
-    display: block !important;
-    width: 32px !important;
-    height: 32px !important;
-    line-height: 0 !important;
-}
-
-/* Tombol */
-/* ... (blok .btn-book dan ke bawah tidak perlu diubah) ... */
-
-/* Tombol */
-.btn-book { 
+.btn-book {
   background: var(--accent);
   color: #000;
   padding: 8px 16px;
@@ -88,183 +73,510 @@ body {
   font-weight: 700;
   border: none;
   cursor: pointer;
-  white-space: nowrap; /* Penting: Mencegah tombol melompat baris jika ruang sempit */
-}
-
-
-/* Revisi link di dalam nav */
-.nav a {
-  color: #eee;
-  text-decoration: none;
-  /* Atur margin-right agar link memiliki jarak */
-  margin-right: 16px;
-  /* Atur padding agar mudah di klik/sentuh */
-  padding: 8px 10px;
-}
-
-/* Hapus margin-right di sini karena sudah diatur di .nav a */
-/* Anda bisa menghapus baris di bawah ini dari CSS Anda yang lama:
-.nav a { color:#eee;text-decoration:none;margin-right:16px; }
-*/
-/* Brand di kiri */
-.brand {
-  font-weight: 700;
-  font-size: 1.5em; /* Ukuran yang sedikit lebih besar */
-}
-
-.nav a:hover {
-  color: var(--accent);
+  white-space: nowrap;
 }
 
 .nav .btn-book:hover {
   background: #7e9217;
 }
 
-/* CSS untuk menyembunyikan/menampilkan navbar */
-
-/* Tambahkan transisi agar pergerakan halus */
-.nav {
-    /* Pastikan Anda menambahkan transisi ini ke .nav yang sudah ada */
-    transition: transform 0.3s ease-in-out; 
+.profil-icon { 
+  width: 28px !important; 
+  height: 28px !important; 
+  display: block !important;
+  border-radius: 50% !important; 
+  object-fit: cover !important; 
+  cursor: pointer !important;
+  border: 1px solid var(--accent) !important;
+}
+.right-action a {
+    display: block !important;
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 0 !important;
 }
 
-/* Class baru untuk menyembunyikan navbar (menggesernya ke atas) */
-.nav.hidden {
-    transform: translateY(-100%); /* Geser ke atas sejauh 100% tinggi navbar */
-}
-
-
-/* HERO */
+/* ==================================== */
+/* HERO SECTION */
+/* ==================================== */
 .hero {
-  display:flex;
-  padding:160px 6% 100px;
-  gap:40px;
+  display: flex;
+  /* Gunakan padding persentase untuk responsif */
+  padding: 160px 6% 100px;
+  gap: 40px;
   background: url('gambar_makanan/bg2.png') no-repeat center/cover;
 }
 
-.hero-left { 
-    flex:1;
-    margin-left: 60px;
-    margin-top: 20px;
- }
-.pretitle { color:var(--accent);font-weight:700; font-size: 20px; }
-h1 { font-family:'Playfair Display'; font-size:65px; margin:0; }
-h1 strong { display:block; font-size:80px; }
-.lead { color:#e2e2e2;margin:16px 0; font-size: 18px; line-height: 1.6; }
+.hero-left {
+  flex: 1;
+  /* Ubah margin-left menjadi 0 dan tambahkan padding */
+  margin-left: 0;
+  margin-top: 20px;
+  padding-left: 60px;
+}
+
+.pretitle {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+h1 {
+  font-family: 'Playfair Display';
+  font-size: 65px;
+  margin: 0;
+}
+
+h1 strong {
+  display: block;
+  font-size: 80px;
+}
+
+.lead {
+  color: #e2e2e2;
+  margin: 16px 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
 
 .btn-find {
-  background:var(--accent);
-  padding:12px 20px;
-  border-radius:25px;
-  border:none;
-  font-weight:800;
-  cursor:pointer;
+  background: var(--accent);
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .btn-find:hover {
-    background:#7e9217;
+  background: #7e9217;
 }
 
-.hero-right { width:460px;display:flex;justify-content:center; }
-.hero-card {
-  width:420px;height:420px;border-radius:50%;
-  box-shadow:0 30px 60px rgba(0,0,0,0.6);
-  display:flex;align-items:center;justify-content:center;
+.hero-right {
+  width: 460px;
+  display: flex;
+  justify-content: center;
 }
+
+.hero-card {
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hero-card img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  position: relative; 
+  position: relative;
   z-index: 2;
-
-  /* PENTING: Tambahkan properti animasi di sini */
-  animation: slowRotate 30s linear infinite; 
-  /*
-    - slowRotate: Nama keyframes yang kita buat.
-    - 30s: Durasi rotasi. Ubah nilai (misalnya 40s atau 60s) untuk membuat putaran lebih lambat.
-    - linear: Kecepatan konstan (tidak dipercepat/diperlambat).
-    - infinite: Animasi berulang tanpa henti.
-  */
+  animation: slowRotate 30s linear infinite;
 }
+
 @keyframes slowRotate {
   from {
-    transform: rotate(0deg); /* Mulai dari 0 derajat */
+    transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg); /* Berakhir di 360 derajat (satu putaran penuh) */
+    transform: rotate(360deg);
   }
 }
 
-
-
-/* SECTION */
+/* ==================================== */
+/* SECTION (SPAGETI & CHEF) */
+/* ==================================== */
 .section {
-  padding:115px 10%;
-  display:flex;
-  align-items:center;
-  gap:40px;
-  
+  padding: 115px 10%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
-.section.alt { background:#2b2b2b; }
+
+.section.alt {
+  background: #2b2b2b;
+}
+
 .section .media img {
-  width:60%;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,0.6);
-  margin-left: 50px;
+  /* Ubah width media menjadi persentase dari container section */
+  width: 100%; 
+  max-width: 450px; 
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  /* Hapus margin-left 50px */
+  margin-left: 0; 
 }
+
+.section .media {
+    /* Tambahkan flex basis agar media mengambil ruang tertentu */
+    flex-basis: 50%;
+}
+.section .content {
+    flex-basis: 50%;
+}
+
+
 .section .content h2 {
-  font-family:'Playfair Display';
-  font-size:35px;
+  font-family: 'Playfair Display';
+  font-size: 35px;
 }
-.accent { color:var(--accent); }
+
+.accent {
+  color: var(--accent);
+}
+
 .find-more {
-  display:inline-block;
-  background:var(--accent);
-  padding:10px 18px;
-  border-radius:20px;
-  margin-top:14px;
-  color:#000;
-  font-weight:700;
+  display: inline-block;
+  background: var(--accent);
+  padding: 10px 18px;
+  border-radius: 20px;
+  margin-top: 14px;
+  color: #000;
+  font-weight: 700;
 }
 
-/* CHEF */
+/* CHEF SECTION */
 .chef {
-  padding:150px 6%;
-  display:flex;
-  gap:40px;
+  padding: 150px 6%;
+  display: flex;
+  gap: 40px;
+  align-items: center;
 }
+
 .chef-photo {
-  width:290px;height:290px;border-radius:50%;overflow:hidden;
-  border:8px solid rgba(255,255,255,0.1);
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 8px solid rgba(255, 255, 255, 0.1);
+  /* Tambahkan shrink agar tidak terpotong */
+  flex-shrink: 0; 
 }
-.chef-photo img { width:100%;height:100%;object-fit:cover; }
 
+.chef-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==================================== */
 /* TESTIMONIALS */
-.testi-wrap { background:#3f3f3f;padding:150px 6%; }
-.testi-wrap h3 {
-  text-align:center;font-family:'Playfair Display';
+/* ==================================== */
+.testi-wrap {
+  background: #3f3f3f;
+  padding: 150px 6%;
 }
-.testi-desc {
-  text-align:center;color:#ddd;max-width:900px;margin:auto;
-}
-.testi-grid {
-  display:flex;gap:24px;justify-content:center;margin-top:40px;
-}
-.testi {
-  background:#fff;color:#000;
-  padding:20px;border-radius:18px;
-  width:320px;position:relative;
-}
-.avatar {
-  width:64px;height:64px;border-radius:50%;
-  overflow:hidden;position:absolute;left:20px;top:-32px;
-}
-.space { height:20px; }
 
-/* FOOTER */
-footer {
-  background:#dcdcdc;color:#000;padding:30px 6%;
+.testi-wrap h3 {
+  text-align: center;
+  font-family: 'Playfair Display';
 }
+
+.testi-desc {
+  text-align: center;
+  color: #ddd;
+  max-width: 900px;
+  margin: auto;
+}
+
+.testi-grid {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.testi {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 18px;
+  width: 320px;
+  position: relative;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 20px;
+  top: -32px;
+}
+
+.space {
+  height: 20px;
+}
+
+/* Styling Ikon Hamburger */
+.menu-toggle {
+    display: none; /* Sembunyikan default di desktop */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    cursor: pointer;
+    z-index: 60; 
+}
+
+/* Styling Menu Mobile (Sidebar) */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background: var(--dark);
+    z-index: 55;
+    transform: translateX(100%); /* Sembunyikan ke kanan */
+    transition: transform 0.3s ease-in-out;
+    padding-top: 80px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu.active {
+    transform: translateX(0); /* Tampilkan menu */
+}
+
+.mobile-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==================================== */
+/* FOOTER */
+/* ==================================== */
+footer {
+    /* Mengadopsi warna latar dari footer Orders */
+    background: #d1ff32;
+    /* Warna teks diubah menjadi gelap agar kontras */
+    color: #111;
+    padding: 30px 6%;
+}
+
 .footer-wrap {
-  display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1200px; /* Batasi lebar agar tidak terlalu melebar di layar besar */
+    margin: 0 auto;
+}
+
+.footer-col {
+    /* Kolom utama mengambil ruang lebih besar */
+    flex-basis: 40%;
+}
+
+.footer-col h4 {
+    margin-top: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.footer-col p {
+    font-size: 0.9em;
+    color: #444;
+}
+
+.cols {
+    display: flex;
+    gap: 40px;
+    /* Dua kolom ini berbagi ruang sisa */
+    flex-basis: 40%; 
+    justify-content: space-between;
+}
+
+.cols h4 {
+    margin-top: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.cols p {
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* ==================================== */
+/* MEDIA QUERY (RESPONSIVE) */
+/* ==================================== */
+
+@media (max-width: 600px) {
+    /* ... (Aturan CSS mobile lainnya) ... */
+    
+    .footer-wrap {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .footer-col, .cols {
+        width: 100%;
+        flex-basis: auto;
+    }
+    
+    .cols {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+/* ==================================== */
+/* MEDIA QUERIES (RESPONSIVE) */
+/* ==================================== */
+
+/* Tablet & Mobile Landscape (Maksimal 992px) */
+@media (max-width: 992px) {
+    /* NAV BAR */
+    .nav {
+        /* Kurangi padding horizontal */
+        padding: 22px 30px; 
+    }
+
+    /* NAV BAR */
+    .nav {
+        padding: 22px 30px; 
+    }
+    
+    /* Tampilkan ikon hamburger */
+    .menu-toggle {
+        display: block; 
+    }
+    
+    /* Sembunyikan menu links default di mobile */
+    .menu-links {
+        display: none; 
+    }
+    
+    /* Geser right-action ke tengah sedikit karena menu links hilang */
+    .right-action {
+        margin-left: auto; 
+    }
+    
+    .menu-links {
+        /* Hapus menu links di layar tablet/kecil */
+        display: none; 
+    }
+    
+    /* HERO SECTION */
+    .hero {
+        flex-direction: column; /* Tumpuk konten ke bawah */
+        padding: 120px 6% 60px;
+        text-align: center;
+    }
+    
+    .hero-left {
+        /* Hapus padding dan margin di kiri */
+        padding-left: 0; 
+    }
+    
+    h1 {
+        font-size: 55px;
+    }
+    
+    h1 strong {
+        font-size: 65px;
+    }
+
+    .hero-right {
+        /* Pindahkan gambar ke bawah */
+        width: 100%;
+        margin-top: 40px;
+    }
+    
+    .hero-card {
+        width: 350px;
+        height: 350px;
+    }
+
+    /* SECTION (SPAGHETTI & CHEF) */
+    .section, .chef {
+        flex-direction: column; /* Tumpuk gambar/media di atas konten */
+        text-align: center;
+        padding: 80px 6%;
+    }
+    
+    .section .media, .section .content {
+        flex-basis: auto;
+        width: 100%;
+    }
+    
+    .section .media {
+        order: 1; /* Pindahkan media (gambar) ke atas di tumpukan */
+        margin-bottom: 20px;
+    }
+    
+    .section .content {
+        order: 2; /* Pindahkan konten ke bawah */
+    }
+    
+    /* Chef photo di section chef juga ditumpuk di atas */
+    .chef-photo {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    .chef .content {
+        order: 2;
+    }
+    
+    /* TESTIMONIALS */
+    .testi-grid {
+        flex-direction: column; /* Tumpuk testimoni */
+        align-items: center;
+    }
+}
+
+/* Mobile Portrait (Maksimal 600px) */
+@media (max-width: 600px) {
+    /* NAV BAR */
+    .nav {
+        padding: 15px 15px;
+    }
+    
+    .right-action .btn-book {
+        /* Sembunyikan tombol booking yang makan banyak tempat */
+        display: none; 
+    }
+    
+    /* HERO SECTION */
+    .hero {
+        padding: 100px 10px 40px;
+    }
+    
+    h1 {
+        font-size: 40px;
+    }
+    
+    h1 strong {
+        font-size: 48px;
+    }
+
+    .hero-card {
+        width: 280px;
+        height: 280px;
+    }
+    
+    /* FOOTER */
+    .footer-wrap {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-col, .cols {
+        width: 100%;
+    }
+    
+    .cols {
+        display: flex;
+        justify-content: space-between;
+    }
 }
