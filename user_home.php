@@ -36,11 +36,19 @@ if (!isset($_SESSION['username'])) {
 
       <div class="right-action">
           <button onclick="location.href='user/pages/menu.php'" class="btn-book">Booking Delivery</button>
+          
+          <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+          
           <a href="user_profile.php">
               <img src="gambar_makanan/profile.png" class="profil-icon">
-          </a>            
+          </a> 
       </div>
   </nav>
+  <div class="mobile-menu">
+      <a href="user/pages/menu.php">Menu</a>
+      <a href="user/pages/orders.php">Orders</a>
+      <a href="#testi">Testi</a>
+  </div>
 
   <!-- HERO -->
   <header class="hero" id="top">
@@ -154,6 +162,13 @@ if (!isset($_SESSION['username'])) {
             navbar.classList.remove('hidden');
         }
         lastScrollY = window.scrollY;
+    });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
     });
   </script>
 
