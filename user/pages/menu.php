@@ -9,7 +9,7 @@ include "../../koneksiDB.php";
 if (!isset($_SESSION['id'])) {
     header("Location: ../../login.php");
     exit;
-}/* jika tidak ada session user id → arahkan ke login */
+}/* jika tidak ada session user id arahkan ke login */
 
 
 $user_id = $_SESSION['id'];

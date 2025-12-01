@@ -26,9 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($result->num_rows > 0){
             $status_message = "Username sudah ada yang pakai";
         } else {
-            // Hash password sebelum disimpan
-            // $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
-            // NOTE: Karena kode Anda tidak menggunakan hash, saya biarkan password asli.
+           
             
             $stmt = $conn->prepare("INSERT INTO roles (username, password, role) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $username, $password, $role);
@@ -40,11 +38,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 }
 
-// AMBIL DAFTAR PENGGUNA UNTUK DITAMPILKAN
 if ($conn) {
     $result = $conn->query("SELECT id, username, role FROM roles ORDER BY id ASC");
 } else {
-    $result = null; // Agar tidak error jika koneksi gagal
+    $result = null; 
 }
 ?>
 
