@@ -24,8 +24,7 @@ if (isset($_POST['checkout'])) {
             VALUES('$menu_id','$qty','$user_id',NOW(),'$subtotal','pending')");
     }
 
-    /* jangan hapus keranjang disini
-       keranjang dihapus setelah kasir memproses pembayaran */
+    /*  keranjang dihapus setelah kasir memproses pembayaran */
     // unset($_SESSION['cart']);
 
     /* diarahkan ke halaman checkout */

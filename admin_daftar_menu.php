@@ -15,13 +15,9 @@ if (!is_dir(UPLOAD_DIR_FS)) {
     @mkdir(UPLOAD_DIR_FS, 0755, true); 
 }
 
-/**
- * Fungsi pembantu untuk menghapus file lama.
- * $filePath adalah NAMA FILE dari database (contoh: 'menu_burger.jpg')
- */
+
 function safeUnlink($filePath) {
     if ($filePath) { // Cek apakah ada nama file
-        // Gabungkan UPLOAD_DIR_FS (Path Server) dengan NAMA FILE
         $fullPath = UPLOAD_DIR_FS . $filePath; 
         
         if (is_file($fullPath)) {
@@ -51,12 +47,12 @@ function handleUpload($fileFieldName, &$err = null) {
 
     if (!move_uploaded_file($file['tmp_name'], $dest)) { $err = "Gagal save file"; return false; }
 
-    // HANYA SIMPAN NAMA FILE KE DATABASE
+    
     return $filename;
 }
 
 
-// --- ADD DATA & UPDATE DATA & DELETE DATA (Logika sudah benar setelah safeUnlink diperbaiki) ---
+// --- ADD DATA & UPDATE DATA & DELETE DATA
 $errMsg = null; 
 if (isset($_POST['tambah'])) {
     $nama = trim($_POST['nama']);
@@ -82,7 +78,7 @@ if (isset($_POST['tambah'])) {
     }
 }
 
-// ... Logika UPDATE dan DELETE sudah benar setelah safeUnlink di atas diperbaiki ...
+// ... Logika UPDATE dan DELETE
 if (isset($_POST['update'])) {
     $id = (int)$_POST['id'];
     $nama = trim($_POST['nama']);
@@ -102,8 +98,7 @@ if (isset($_POST['update'])) {
         $oldImage = $res['image_path'] ?? null;
         $imagePath = ($gambarPath === null) ? $oldImage : $gambarPath; 
         $stmt = $conn->prepare("UPDATE menu SET nama=?, harga=?, image_path=? WHERE id=?"); 
-        $stmt->bind_param("dsi", $nama, $harga, $imagePath, $id); 
-        if ($stmt->execute()) {
+        $stmt->bind_param("sdsi", $nama, $harga, $imagePath, $id);        if ($stmt->execute()) {
             if ($gambarPath !== null && $oldImage) { safeUnlink($oldImage); }
             $stmt->close();
             header("Location: " . $_SERVER['PHP_SELF']);
@@ -115,7 +110,6 @@ if (isset($_POST['update'])) {
         }
     }
 }
-// ... MODE EDIT tetap sama ...
 $editData = null;
 if (isset($_GET['edit'])) {
     $id = (int)$_GET['edit'];
@@ -126,7 +120,6 @@ if (isset($_GET['edit'])) {
     $editData = $result->fetch_assoc(); 
     $stmt->close();
 }
-// ... DELETE DATA tetap sama ...
 if (isset($_GET['hapus'])) {
     $id = (int)$_GET['hapus'];
     $stmt = $conn->prepare("SELECT image_path FROM menu WHERE id = ?");
